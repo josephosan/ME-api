@@ -23,7 +23,7 @@ app.use(cors({ }));
 app.use(morgan('tiny'));
 
 // CONNECTING TO DATABASE:
-const dbURL = config.mongoDBLocalURL();
+const dbURL = config.mongoDBCloudURL('joseph', '09917758802rAAAjoseph.o');
 mongoose.connect(dbURL)
   .then(() => appDebug('Connected to mongodb database...'))
   .catch((err) => console.error(err));
