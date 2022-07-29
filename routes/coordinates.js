@@ -102,4 +102,37 @@ router.get('', async (req, res) => {
   }
 });
 
+router.get('/:status', async (req, res) => {
+  try {
+    if(req.query.onlyCount === "true" && req.params.status === 'count') {
+      let coordinates = await Coordinates.find();
+
+    if(!coordinates) {
+      res.status(404).json({
+        success: true,
+        message: 'No coordinate found!'
+      });
+      return;
+    }
+
+    res.status(200).json({
+      success: true,
+      count: coordinates.length
+    });
+  } else {
+    res.status(404).json({
+      success: true,
+      message: 'This id does not exists!'
+    });
+  }
+  } catch(err) {
+    console.error(err);
+    res.status(500).json({
+      success: false,
+      message: 'Server Error!',
+      errMessage: err.message
+    });
+  }
+})
+
 module.exports = router;

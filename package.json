@@ -12,11 +12,13 @@
   "license": "ISC",
   "dependencies": {
     "axios": "^0.27.2",
+    "cheerio": "^1.0.0-rc.12",
     "cors": "^2.8.5",
     "debug": "^4.3.4",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
     "is-valid-coordinates": "^1.0.0",
+    "jquery": "^3.6.0",
     "mongoose": "^6.4.4",
     "morgan": "^1.10.0",
     "node-geocoder": "^4.2.0",

@@ -8,6 +8,7 @@ const config = require('./config/config');
 const metroLines = require('./routes/metro-lines');
 const coordinates = require('./routes/coordinates');
 const home = require('./routes/home');
+const linkCoordinate = require('./routes/linkCoordinate');
 
 
 dotenv.config({ path: './config/config.env' });
@@ -33,6 +34,7 @@ mongoose.connect(dbURL)
 // ROUTES:
 app.use('/api/metro-lines', metroLines);
 app.use('/api/coordinates', coordinates);
+app.use('/api/link-coordinates', linkCoordinate);
 app.use('', home);
 
 

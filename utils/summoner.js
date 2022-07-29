@@ -1,9 +1,11 @@
 const axios = require('axios');
+const config = require('../config/config');
 
 const run = async (userCoordinate) => {
   try {
+    let metroLinesLink = config.metroLinesCloudLink();
     // Getting metro lines:
-    let metroLines = await axios.get('https://metro-finder-api.herokuapp.com/api/metro-lines');
+    let metroLines = await axios.get(metroLinesLink+'');
 
     let finalDistance = 1_000_000;
     let nearestStation = null;
