@@ -11,12 +11,17 @@ const home = require('./routes/home');
 const linkCoordinate = require('./routes/linkCoordinate');
 
 
+const helmet = require('helmet');
+const users = require('./routes/users');
+const summonerNewsEamiler = require('./utils/summonerNewsEmailer');
+
 dotenv.config({ path: './config/config.env' });
 
 const app = express();
 
 // BODY PARSER:
 app.use(express.json());
+app.use(helmet());
 
 // ENABLE CORES:
 app.use(cors({ }));
@@ -26,15 +31,25 @@ app.use(morgan('tiny'));
 
 // CONNECTING TO DATABASE:
 const dbURL = config.mongoDBCloudURL('joseph', '09917758802rAAAjoseph.o');
-mongoose.connect(dbURL)
-  .then(() => appDebug('Connected to mongodb database...'))
+const localDB = config.mongoDBLocalURL();
+mongoose.connect(localDB)
+  .then(() => {
+    appDebug('Connected to metro-finder data base ...')
+  })
   .catch((err) => console.error(err));
 
 
-// ROUTES:
-app.use('/api/metro-lines', metroLines);
-app.use('/api/coordinates', coordinates);
-app.use('/api/link-coordinates', linkCoordinate);
+// metro-finder routes :
+app.use('/api/metro-finder/metro-lines', metroLines);
+app.use('/api/metro-finder/coordinates', coordinates);
+app.use('/api/metro-finder/link-coordinates', linkCoordinate);
+
+// news-emailer routes :
+app.use('/api/news-emailer/users', users);
+app.use('/api/news-emailer/users-data', summonerNewsEamiler.allData);
+
+
+// home route : 
 app.use('', home);
 
 
