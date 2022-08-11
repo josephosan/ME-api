@@ -43,7 +43,8 @@ const getNewsData = async (req, res) => {
       success: true,
       title: newsTitles[0].children[0].data,
       body: newsBody[0].children[0].data,
-      time: newsTime[0].children[1].data
+      time: newsTime[0].children[1].data,
+      readMore: 'https://www.tasnimnews.com/'
     }
     
   } catch(err) {
@@ -73,8 +74,10 @@ let emailSender = (userData, newsData) => {
                   <table role="presentation" style="width:100%;border-collapse:collapse;border:0;border-spacing:0;">
                     <tr>
                       <td style="padding:0 0 36px 0;color:#153643;">
-                        <h1 style="font-size:24px;margin:0 0 20px 0;font-family:Arial,sans-serif;">Hello ${newsData.title}</h1>
-                        <p style="margin:0 0 12px 0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;">${newsData.body} \n ${newsData.time}</p>
+                        <h1 style="font-size:24px;margin:0 0 20px 0;font-family:Arial,sans-serif;">${newsData.title}</h1>
+                        <p style="margin:0 0 12px 0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;">${newsData.body}</p>
+                        <p style="margin:0 0 12px 0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;">${newsData.time}</p>
+                        <p style="margin:0 0 12px 0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;">Read more: ${newsData.readMore}</p>
                         <p style="margin:0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;"><a href="https://josephosan.info" style="color:#ee4c50;text-decoration:underline;">contact</a></p>
                       </td>
                     </tr>
@@ -130,7 +133,7 @@ const allData = async (req, res) => {
   try {
     let USERS_DATA = await getUsersData(req, res);
     let NEWS_DATA = await getNewsData(req, res);
-    return;  
+
     emailSender(USERS_DATA, NEWS_DATA);
     res.send('done!');
   } catch(err) {

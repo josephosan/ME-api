@@ -30,7 +30,6 @@ app.use(cors({ }));
 app.use(morgan('tiny'));
 
 // CONNECTING TO DATABASE:
-const dbURL = config.mongoDBCloudURL('joseph', '09917758802rAAAjoseph.o');
 const localDB = config.mongoDBLocalURL();
 mongoose.connect(localDB)
   .then(() => {
