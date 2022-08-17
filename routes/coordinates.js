@@ -105,7 +105,7 @@ router.get('', async (req, res) => {
 router.get('/:status', async (req, res) => {
   try {
     if(req.query.onlyCount === "true" && req.params.status === 'count') {
-      let coordinates = await Coordinates.find();
+      let coordinates = await Coordinates.count();
 
     if(!coordinates) {
       res.status(404).json({
@@ -117,7 +117,7 @@ router.get('/:status', async (req, res) => {
 
     res.status(200).json({
       success: true,
-      count: coordinates.length
+      count: coordinates
     });
   } else {
     res.status(404).json({
